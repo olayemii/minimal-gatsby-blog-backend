@@ -1,1 +1,1 @@
-web: python manage.py runserver -p 8080
+web: python manage.py runserver

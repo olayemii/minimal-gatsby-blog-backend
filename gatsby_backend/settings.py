@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -104,7 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 MDEDITOR_CONFIGS = {
-    'default':{
+    'default': {
         'width': '90% ',  # Custom edit box width
         'heigth': 500,  # Custom edit box height
         'toolbar': ["undo", "redo", "|",
@@ -114,8 +115,9 @@ MDEDITOR_CONFIGS = {
                     "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime"
                     "emoji", "html-entities", "pagebreak", "goto-line", "|",
                     "help", "info",
-                    "||", "preview", "watch", "fullscreen"],  # custom edit box toolbar 
-        'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp", "webp"],  # image upload format type
+                    "||", "preview", "watch", "fullscreen"],  # custom edit box toolbar
+        # image upload format type
+        'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
         'image_folder': 'editor',  # image save the folder name
         'theme': 'default',  # edit box theme, dark / default
         'preview_theme': 'default',  # Preview area theme, dark / default
@@ -125,12 +127,12 @@ MDEDITOR_CONFIGS = {
         'emoji': True,  # whether to open the expression function
         'tex': True,  # whether to open the tex chart function
         'flow_chart': True,  # whether to open the flow chart function
-        'sequence': True, # Whether to open the sequence diagram function
+        'sequence': True,  # Whether to open the sequence diagram function
         'watch': True,  # Live preview
         'lineWrapping': False,  # lineWrapping
         'lineNumbers': False  # lineNumbers
     }
-    
+
 }
 
 # Internationalization
@@ -152,14 +154,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
-STATICFILES_DIRS  = (os.path.join(BASE_DIR, 'static'), )
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
 
 # Media URL
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
 
 MDEDITOR_CONFIGS = {
-    'default':{
+    'default': {
         'lineWrapping': True
     }
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())

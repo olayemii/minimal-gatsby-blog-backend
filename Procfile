@@ -1,1 +1,1 @@
-web: python manage.py runserver https://gatsby-minimal-blog.herokuapp.com:8092
+web: python manage.py runserver 0.0.0.0:8092

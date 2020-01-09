@@ -9,16 +9,14 @@ from django.utils.html import strip_tags
 class Post(models.Model):
     title = models.CharField(max_length=255)
     content = MDTextField()
-    author = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
+    author = models.ForeignKey(
+        User, related_name="posts", on_delete=models.CASCADE)
     slug = models.SlugField(unique=True, max_length=500, blank=True)
-    excerpt = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        self.excerpt = strip_tags(self.content)
         super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -42,8 +40,10 @@ class Tag(models.Model):
 
 
 class PostTag(models.Model):
-    post = models.ForeignKey(Post, related_name="tags", on_delete=models.CASCADE)
-    tag = models.ForeignKey(Tag, related_name="posts", on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name="tags",
+                             on_delete=models.CASCADE)
+    tag = models.ForeignKey(Tag, related_name="posts",
+                            on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -52,4 +52,3 @@ class PostTag(models.Model):
 
     class Meta:
         ordering = ("-created_at",)
-

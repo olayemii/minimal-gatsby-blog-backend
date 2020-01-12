@@ -18,3 +18,4 @@ class TagListView(ListAPIView):
     serializer_class = CustomSerializer
     queryset = PostTag.objects.values('tag__name').annotate(
         count=Count('tag__name'), id=F('tag__id'), name=F('tag__name'), color=F('tag__color')).order_by('tag__name')
+#
